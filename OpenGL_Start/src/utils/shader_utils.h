@@ -1,6 +1,4 @@
-//
-// Created by Andrii Krenevych on 09.04.2026.
-//
+
 
 #ifndef OPENGL_START_SHADER_UTILS_H
 #define OPENGL_START_SHADER_UTILS_H
@@ -14,5 +12,7 @@ GLuint  createShader(std::string &filePath, GLuint shaderType);
 GLuint createProgram(
     std::string &vertexShaderName,
     std::string &fragmentShaderName);
+
+
 
 #endif //OPENGL_START_SHADER_UTILS_H

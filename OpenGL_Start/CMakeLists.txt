@@ -16,10 +16,12 @@ set(libs
         glm
 )
 
-########### LESSON 2 ##############
+########### LESSON 1 ##############
 set(LESSON_TARGET lesson01)
 set(LESSON_DIR src/${LESSON_TARGET})
-add_executable(${LESSON_TARGET} ${LESSON_DIR}/main.cpp)
+add_executable(${LESSON_TARGET} ${LESSON_DIR}/main.cpp
+        src/HW2_3/main.cpp
+)
 target_link_libraries(${LESSON_TARGET} ${libs})
 
 ########### LESSON 2 ##############
@@ -38,6 +40,37 @@ add_executable(${LESSON_TARGET}
 target_link_libraries(${LESSON_TARGET} ${libs})
 target_include_directories(${LESSON_TARGET} PRIVATE ${LESSON_DIR})
 
+add_custom_command(  # Копіює ресурси з папки src/res у build директорію
+        TARGET ${LESSON_TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/${LESSON_DIR}/res
+        $<TARGET_FILE_DIR:${LESSON_TARGET}>/res
+)
+
+set(UTILS_DIR src/utils)
+file(GLOB_RECURSE UTILS_SRC
+        ${UTILS_DIR}/*.cpp
+        ${UTILS_DIR}/*.h
+)
+#MESSAGE("==== UTILS_DIR: " ${UTILS_SRC})
+
+########### LESSON 3 ##############
+set(LESSON_TARGET lesson03)
+set(LESSON_DIR src/${LESSON_TARGET})
+
+FILE(GLOB_RECURSE LESSON_SRC
+        ${LESSON_DIR}/*.cpp
+        ${LESSON_DIR}/*.h
+)
+#MESSAGE("====" ${LESSON_SRC})
+
+add_executable(${LESSON_TARGET}
+        ${LESSON_SRC}
+        ${UTILS_SRC}
+)
+target_link_libraries(${LESSON_TARGET} ${libs})
+#target_include_directories(${LESSON_TARGET} PRIVATE ${LESSON_DIR})
+target_include_directories(${LESSON_TARGET} PRIVATE ${UTILS_DIR})
 
 add_custom_command(  # Копіює ресурси з папки src/res у build директорію
         TARGET ${LESSON_TARGET} POST_BUILD
@@ -47,14 +80,142 @@ add_custom_command(  # Копіює ресурси з папки src/res у buil
 )
 
 
-set(LESSON_TARGET HW2_2)
-set(LESSON_DIR src/HW2_2)
+########### LESSON 4 ##############
+set(LESSON_TARGET lesson04)
+set(LESSON_DIR src/${LESSON_TARGET})
 
-file(GLOB_RECURSE HW2_SRC
+FILE(GLOB_RECURSE LESSON_SRC
         ${LESSON_DIR}/*.cpp
         ${LESSON_DIR}/*.h
 )
+#MESSAGE("====" ${LESSON_SRC})
 
-add_executable(${LESSON_TARGET} ${HW2_SRC})
+add_executable(${LESSON_TARGET}
+        ${LESSON_SRC}
+        ${UTILS_SRC}
+)
 target_link_libraries(${LESSON_TARGET} ${libs})
-target_include_directories(${LESSON_TARGET} PRIVATE ${LESSON_DIR})
+target_include_directories(${LESSON_TARGET} PRIVATE ${UTILS_DIR})
+
+add_custom_command(  # Копіює ресурси з папки src/res у build директорію
+        TARGET ${LESSON_TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/${LESSON_DIR}/res
+        $<TARGET_FILE_DIR:${LESSON_TARGET}>/res
+)
+
+
+
+########### LESSON 5 ##############
+set(LESSON_TARGET lesson05)
+set(LESSON_DIR src/${LESSON_TARGET})
+
+FILE(GLOB_RECURSE LESSON_SRC
+        ${LESSON_DIR}/*.cpp
+        ${LESSON_DIR}/*.h
+)
+#MESSAGE("====" ${LESSON_SRC})
+
+add_executable(${LESSON_TARGET}
+        ${LESSON_SRC}
+        ${UTILS_SRC}
+)
+target_link_libraries(${LESSON_TARGET} ${libs})
+target_include_directories(${LESSON_TARGET} PRIVATE ${UTILS_DIR})
+
+add_custom_command(  # Копіює ресурси з папки src/res у build директорію
+        TARGET ${LESSON_TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/${LESSON_DIR}/res
+        $<TARGET_FILE_DIR:${LESSON_TARGET}>/res
+)
+
+
+
+
+
+########### LESSON 6 ##############
+set(LESSON_TARGET lesson06)
+set(LESSON_DIR src/${LESSON_TARGET})
+
+FILE(GLOB_RECURSE LESSON_SRC
+        ${LESSON_DIR}/*.cpp
+        ${LESSON_DIR}/*.h
+)
+#MESSAGE("====" ${LESSON_SRC})
+
+add_executable(${LESSON_TARGET}
+        ${LESSON_SRC}
+        ${UTILS_SRC}
+)
+target_link_libraries(${LESSON_TARGET} ${libs})
+target_include_directories(${LESSON_TARGET} PRIVATE ${UTILS_DIR})
+
+add_custom_command(  # Копіює ресурси з папки src/res у build директорію
+        TARGET ${LESSON_TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/${LESSON_DIR}/res
+        $<TARGET_FILE_DIR:${LESSON_TARGET}>/res
+)
+
+
+########### HW2_3 ##############
+set(HW_TARGET HW2_3)
+set(HW_DIR src/${HW_TARGET})
+
+file(GLOB_RECURSE HW_SRC
+        ${HW_DIR}/*.cpp
+        ${HW_DIR}/*.h
+)
+
+add_executable(${HW_TARGET}
+        ${HW_SRC}
+        ${UTILS_SRC}
+)
+
+target_link_libraries(${HW_TARGET} ${libs})
+
+target_include_directories(${HW_TARGET} PRIVATE
+        ${UTILS_DIR}
+        ${CMAKE_SOURCE_DIR}/src
+)
+
+add_custom_command(
+        TARGET HW2_3 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/HW2_3/res
+        $<TARGET_FILE_DIR:HW2_3>/res
+)
+
+
+
+
+
+########### HW2_3_2 ##############
+set(HW_TARGET HW2_3_2)
+set(HW_DIR src/${HW_TARGET})
+
+file(GLOB_RECURSE HW_SRC
+        ${HW_DIR}/*.cpp
+        ${HW_DIR}/*.h
+)
+
+add_executable(${HW_TARGET}
+        ${HW_SRC}
+        ${UTILS_SRC}
+)
+
+target_link_libraries(${HW_TARGET} ${libs})
+
+target_include_directories(${HW_TARGET} PRIVATE
+        ${UTILS_DIR}
+        ${CMAKE_SOURCE_DIR}/src
+)
+
+add_custom_command(
+        TARGET HW2_3 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/HW2_3/res
+        $<TARGET_FILE_DIR:HW2_3>/res
+)
+
